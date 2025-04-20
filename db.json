@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "id": "2c8f",
+      "sender": "Thiago",
+      "recipient": "Priscila",
+      "money": 120,
+      "description": "Pagamento do condomínio",
+      "date": "2025-04-20T00:37:47.334Z"
+    },
+    {
+      "id": "fb13",
+      "sender": "Thiago",
+      "recipient": "Priscila",
+      "money": 120,
+      "description": "Pagamento do condomínio",
+      "date": "2025-04-20T00:38:26.819Z"
+    }
+  ]
+}

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 import { PoDynamicFormField, PoMenuItem } from '@po-ui/ng-components';
+import { environment } from '../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +12,12 @@ import { PoDynamicFormField, PoMenuItem } from '@po-ui/ng-components';
   standalone: false
 })
 export class AppComponent {
+
+  dynamicForm!: NgForm;
+  raw!: any;
+  API = environment.API;
+
+  constructor(private http: HttpClient){}
 
   readonly menus: Array<PoMenuItem> = [
     { label: 'Home', action: () => alert('Hello World!') }
@@ -22,6 +31,17 @@ export class AppComponent {
   ]
 
   save() {
-    alert('Ok');
+    this.raw = this.dynamicForm.form.getRawValue();
+    this.raw = {
+      ...this.raw,
+      date: new Date().toISOString()
+    }
+    this.http.post(this.API, this.raw).subscribe(() => {
+      alert('Ok!');
+    })
+  }
+
+  getForm(form: NgForm) {
+    this.dynamicForm = form;
   }
 }
