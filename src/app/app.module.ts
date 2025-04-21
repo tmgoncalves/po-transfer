@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PoButtonModule, PoDynamicModule, PoModule } from '@po-ui/ng-components';
+import { PoButtonModule, PoContainerModule, PoDynamicModule, PoListViewModule, PoModule, PoStepperModule } from '@po-ui/ng-components';
 import { RouterModule } from '@angular/router';
 import { PoTemplatesModule } from '@po-ui/ng-templates';
 
@@ -20,7 +20,10 @@ import { PoTemplatesModule } from '@po-ui/ng-templates';
     PoTemplatesModule,
     PoDynamicModule,
     PoButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    PoStepperModule,
+    PoListViewModule,
+    PoContainerModule
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

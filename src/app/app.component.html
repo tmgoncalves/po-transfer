@@ -1,16 +1,45 @@
 <div class="po-wrapper">
-  <po-toolbar p-title="AppName"></po-toolbar>
+  <po-toolbar p-title="PO-UI Understandings"></po-toolbar>
 
   <po-menu [p-menus]="menus"></po-menu>
 
-  <po-page-default p-title="AppName">
-    <po-dynamic-form #dynamicForm (p-form)="getForm($event)" [p-fields]="propertyForm">
-    </po-dynamic-form>
-    <po-button
-      [p-disabled]="dynamicForm.form.invalid || false"
-      p-label="Salvar"
-      class="po-md-3"
-      (p-click)="save()">
-    </po-button>
+  <po-page-default p-title="Tela de cadastro">
+
+    <po-stepper #stepper [p-step-icons]="true">
+      <po-step p-label="Transferencia" [p-can-active-next-step]="poData.bind(this)">
+        <po-dynamic-form #dynamicForm (p-form)="getForm($event)" [p-fields]="propertyForm">
+        </po-dynamic-form>
+        <po-button
+          [p-disabled]="dynamicForm.form.invalid || false"
+          p-label="Salvar"
+          class="po-md-3"
+          (p-click)="save()">
+        </po-button>
+      </po-step>
+      <po-step p-label="Confirmacao" [p-can-active-next-step]="poAccept.bind(this)">
+        <po-list-view p-property-title="name" [p-actions]="actions" [p-items]="transactionConfirm">
+          <ng-template p-list-view-content-template let-item>
+            <div class="po-row">
+              <po-info class="po-md-4" p-label="Remetente" [p-value]="item.sender"></po-info>
+              <po-info class="po-md-4" p-label="Destinatario" [p-value]="item.recipient"></po-info>
+              <po-info class="po-md-4" p-label="Valor" [p-value]="item.money"></po-info>
+            </div>
+          </ng-template>
+        </po-list-view>
+      </po-step>
+      <po-step p-label="Concluido" [p-can-active-next-step]="poConcluded.bind(this)">
+        <po-container>
+          <img class="po-page-blocked-user-image po-mt-5" src="https://www.pngall.com/wp-content/uploads/2016/07/Success-PNG-Image.png" alt="Confirmacao">
+        </po-container>
+        <po-button
+          [p-disabled]="dynamicForm.form.invalid || false"
+          p-label="Cancelar"
+          class="po-mt-3"
+          (p-click)="save()">
+        </po-button>
+      </po-step>
+    </po-stepper>
+
+    
   </po-page-default>
 </div>
