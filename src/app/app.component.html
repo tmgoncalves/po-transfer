@@ -1,3 +1,8 @@
+<po-loading-overlay
+  [hidden]="isHideLoading"
+  p-text="Carregando">
+</po-loading-overlay>
+
 <div class="po-wrapper">
   <po-toolbar p-title="PO-UI Understandings"></po-toolbar>
 
@@ -6,7 +11,7 @@
   <po-page-default p-title="Tela de cadastro">
 
     <po-stepper #stepper [p-step-icons]="true">
-      <po-step p-label="Transferencia" [p-can-active-next-step]="poData.bind(this)">
+      <po-step p-label="Transferência" [p-can-active-next-step]="poData.bind(this)">
         <po-dynamic-form #dynamicForm (p-form)="getForm($event)" [p-fields]="propertyForm">
         </po-dynamic-form>
         <po-button
@@ -27,7 +32,7 @@
           </ng-template>
         </po-list-view>
       </po-step>
-      <po-step p-label="Concluido" [p-can-active-next-step]="poConcluded.bind(this)">
+      <po-step p-label="Concluído" [p-can-active-next-step]="poConcluded.bind(this)">
         <po-container>
           <img class="po-page-blocked-user-image po-mt-5" src="https://www.pngall.com/wp-content/uploads/2016/07/Success-PNG-Image.png" alt="Confirmacao">
         </po-container>

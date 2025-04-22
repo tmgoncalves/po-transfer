@@ -1,12 +1,3 @@
 {
-  "items": [
-    {
-      "id": "15c2",
-      "sender": "Thiago",
-      "recipient": "Priscila",
-      "money": 120,
-      "description": "Condomínio",
-      "date": "2025-04-21T17:06:13.738Z"
-    }
-  ]
+  "items": []
 }

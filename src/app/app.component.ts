@@ -18,9 +18,11 @@ export class AppComponent {
   API = environment.API;
   transactionConfirm: any = [];
 
-  propertyData: boolean = true;
-  propertyAccept: boolean = true;
-  propertyConcluded: boolean = true;
+  propertyData: boolean = false;
+  propertyAccept: boolean = false;
+  propertyConcluded: boolean = false;
+
+  isHideLoading: boolean = true;
 
   constructor(private http: HttpClient){}
 
@@ -50,15 +52,22 @@ export class AppComponent {
   ]
 
   save() {
+    this.transactionConfirm = [];
     this.raw = this.dynamicForm.form.getRawValue();
     this.raw = {
       ...this.raw,
       date: new Date().toISOString()
     }
+
+    this.isHideLoading = false;
+
     this.http.post(this.API, this.raw).subscribe((response) => {
+      this.propertyData = true;
       this.transactionConfirm.push(response);
       this.dynamicForm.reset();
       this.stepper.next();
+      this.propertyData = false;
+      this.isHideLoading = true;
     })
   }
 
@@ -79,8 +88,15 @@ export class AppComponent {
   }
 
   confirm() {
-    this.stepper.next();
-    this.dynamicForm.reset();
+    this.isHideLoading = false;
+
+    setTimeout(() => {
+      this.propertyAccept = true;
+      this.stepper.next();
+      this.propertyAccept = false;
+      this.dynamicForm.reset();
+      this.isHideLoading = true;
+    }, 2000);
   }
 
   cancel() {
