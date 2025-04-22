@@ -4,17 +4,17 @@ Esse repositório tem como objetivo explorar o framework de Front-end PO-UI.
 
 Documentação utilizada: PO-UI
 
-- [Getting Started](#GettingStarted)
-- [Componentes Iniciais](#ComponentesGerados)
-- [Inserir Campos](#InserirCampos)
-- [Botões](#Buttom)
+- [Getting Started](#getting-started)
+- [Componentes Iniciais](#componentes-iniciais)
+- [Inserir Campos](#inserir-campos)
+- [Botões](#botoes)
 
 
 ### Getting Started
 https://po-ui.io/guides/getting-started
 
 
-### Componentes gerados automaticamente:
+### Componentes Iniciais
 
 po-toolbar
 https://po-ui.io/documentation/po-toolbar
@@ -26,7 +26,7 @@ po-page-default
 https://po-ui.io/documentation/po-page-default
 
 
-### Inserir campos
+### Inserir Campos
 
 https://po-ui.io/documentation/po-dynamic-form
 
