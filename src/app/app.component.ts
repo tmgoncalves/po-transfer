@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { PoDynamicFormField, PoListViewAction, PoMenuItem, PoStepperComponent } from '@po-ui/ng-components';
+import { PoDynamicFormField, PoGaugeRanges, PoListViewAction, PoMenuItem, PoStepperComponent } from '@po-ui/ng-components';
 import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
@@ -24,7 +24,16 @@ export class AppComponent {
 
   isHideLoading: boolean = true;
 
+  poGaugeAll: number = 0;
+  poGaugeDay:number = 0;
+
   constructor(private http: HttpClient){}
+
+  turnoverRanges: Array<PoGaugeRanges> = [
+    { from: 0, to: 50, label: 'Baixo', color: '#00b28e' },
+    { from: 50, to: 75, label: 'Médio', color: '#ea9b3e' },
+    { from: 75, to: 100, label: 'Alto', color: '#c64840' }
+  ];
 
   readonly menus: Array<PoMenuItem> = [
     { label: 'Home', icon: 'an an-hand-peace', action: () => alert('Hello World!') }
@@ -52,6 +61,14 @@ export class AppComponent {
   ]
 
   save() {
+
+    if(this.poGaugeDay >= 100) {
+      alert('Limite diário atingido')
+      return
+    } else if (this.poGaugeAll >= 100) {
+      alert('Limite total atingido')
+      return
+    }
     this.transactionConfirm = [];
     this.raw = this.dynamicForm.form.getRawValue();
     this.raw = {
@@ -89,6 +106,7 @@ export class AppComponent {
 
   confirm() {
     this.isHideLoading = false;
+    this.updatePoGauge();
 
     setTimeout(() => {
       this.propertyAccept = true;
@@ -97,9 +115,31 @@ export class AppComponent {
       this.dynamicForm.reset();
       this.isHideLoading = true;
     }, 2000);
+
+    setTimeout(() => {
+      this.stepper.first();
+    }, 4000)
   }
 
   cancel() {
     this.stepper.first();
+  }
+
+  updatePoGauge() {
+    this.http.get(this.API).subscribe((items: any) => {
+      this.poGaugeAll = 10 * items.length;
+
+      const today = new Date().toLocaleDateString();
+      let count = 0;
+
+      items.map((response: any) => {
+        const dateToCompare = new Date(response.date).toLocaleDateString();
+
+        if (today === dateToCompare) {
+          count++;
+        }
+      })
+      this.poGaugeDay = count;
+    })
   }
 }
