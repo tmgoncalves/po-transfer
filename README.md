@@ -4,7 +4,7 @@ Esse repositório tem como objetivo explorar o framework de Front-end PO-UI.
 
 Documentação utilizada: PO-UI
 
-[Getting Started] Getting Started
+[Getting Started](#GettingStarted)
 
 
 ### Getting Started
